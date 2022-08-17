@@ -24,7 +24,7 @@ import { loadSTL, loadDAE } from './utils/loadMesh';
 import setRobotRotation from './utils/setRobotRotation';
 import * as axes from '../../constants/axes';
 
-const URDF_FILE_PATH = '../urdf/simple/simple.urdf';
+const URDF_FILE_PATH = '../urdf/panda/panda_arm.urdf';
 
 /*
 
@@ -96,6 +96,13 @@ function init(canvasEl: HTMLCanvasElement): void {
   const gridHelper = new THREE.GridHelper( size, divisions ); 
   scene.add( gridHelper );
 
+  // Axes Helper
+  const axesHelper = new THREE.AxesHelper( 2 );
+  let x_axis_color = new THREE.Color(0xffd324);
+  let y_axis_color = new THREE.Color(0x00e5ff);
+  let z_axis_color = new THREE.Color(0x00b0ff);
+  axesHelper.geometry.attributes.color.setColors( x_axis_color, y_axis_color, z_axis_color );
+  scene.add(axesHelper);
   // Allow user to rotate around the robot.
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minDistance = 1;
