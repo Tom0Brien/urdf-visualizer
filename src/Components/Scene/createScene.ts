@@ -97,12 +97,16 @@ function init(canvasEl: HTMLCanvasElement): void {
   scene.add( gridHelper );
 
   // Axes Helper
-  const axesHelper = new THREE.AxesHelper( 2 );
-  let x_axis_color = new THREE.Color(0xffd324);
-  let y_axis_color = new THREE.Color(0x00e5ff);
-  let z_axis_color = new THREE.Color(0x00b0ff);
-  axesHelper.geometry.attributes.color.setColors( x_axis_color, y_axis_color, z_axis_color );
-  scene.add(axesHelper);
+  var helper = new THREE.AxesHelper(2);
+  var colors = helper.geometry.attributes.color;
+  colors.setXYZ(0, 1, 0, 0);
+  colors.setXYZ(1, 1, 0, 0);
+  colors.setXYZ(2, 0, 0, 1);
+  colors.setXYZ(3, 0, 0, 1);
+  colors.setXYZ(4, 0, 1, 0);
+  colors.setXYZ(5, 0, 1, 0);
+  scene.add(helper);
+  
   // Allow user to rotate around the robot.
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minDistance = 1;
