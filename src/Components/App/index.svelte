@@ -3,7 +3,9 @@
   import type { JointInfo } from "../../types";
 
   import Interface from "../Interface/index.svelte";
+  import Player from "../Player/Player.svelte";
   import Scene from "../Scene/index.svelte";
+  import TopBar from "../TopBar/TopBar.svelte";
 
   let jointInfos: JointInfo[] = [];
   jointInfosStore.subscribe((value: JointInfo[]): void => {
@@ -22,6 +24,8 @@
   in the parent component.
 -->
 <Interface bind:jointInfos bind:selectedUpAxis />
+<TopBar />
+<Player />
 <Scene {jointInfos} {selectedUpAxis} />
 
 <style global lang="postcss">

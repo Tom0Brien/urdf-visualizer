@@ -9,7 +9,7 @@
   export let selectedUpAxis: string;
 </script>
 
-<div class="bg-slate-800 w-76 h-screen absolute z-20 p-2">
+<div class="bg-slate-800 w-76 h-screen absolute z-20 px-4 pt-4">
   <Header />
   <UpAxisDropdown bind:selectedUpAxis />
   <JointControls bind:jointInfos />

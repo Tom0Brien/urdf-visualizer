@@ -59,6 +59,7 @@
 </script>
 
 <!-- Bind the canvas to `canvasEl` on component mount -->
+
 <canvas
   bind:this={canvasEl}
   on:dragenter={cancelEventDefaultBehaviors}

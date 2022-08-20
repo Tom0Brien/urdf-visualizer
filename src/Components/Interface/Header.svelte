@@ -2,9 +2,10 @@
 </script>
 
 <div
-  class="text-3xl text-slate-300 mx-auto content-center w-88 mb-14 self-center items-center px-8 pt-4"
+  class="flex text-xl text-slate-300 text-center w-88 mb-14 items-center px-6 pt-2"
 >
-  <span class="mx-auto ">URDF Visualizer</span>
+  <img class="w-8 mr-4" src="../icons/logo2.png" />
+  <span>URDF Visualizer</span>
 </div>
 
 <style>

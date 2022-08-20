@@ -88,7 +88,7 @@ function init(canvasEl: HTMLCanvasElement): void {
   scene.add(lights[2]);
 
   // Background
-  scene.background = new THREE.Color(0x263238);
+  scene.background = new THREE.Color(0xF1F5F9); //0x263238
 
   // Grid
   const size = 100;
