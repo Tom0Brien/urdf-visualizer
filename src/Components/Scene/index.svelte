@@ -59,10 +59,11 @@
 </script>
 
 <!-- Bind the canvas to `canvasEl` on component mount -->
-
-<canvas
-  bind:this={canvasEl}
-  on:dragenter={cancelEventDefaultBehaviors}
-  on:dragover={cancelEventDefaultBehaviors}
-  on:drop={handleDrop}
-/>
+<div class="drawer-content">
+  <canvas
+    bind:this={canvasEl}
+    on:dragenter={cancelEventDefaultBehaviors}
+    on:dragover={cancelEventDefaultBehaviors}
+    on:drop={handleDrop}
+  />
+</div>

@@ -9,17 +9,38 @@
   }
 
   // Frame rate
-  var frame_rate = 60;
   var play_icon = "../icons/play.svg";
   var pause_icon = "../icons/pause.svg";
   var button_src = play_icon;
   var playing = false;
   var current_frame = 0;
 
+  var frame_rate = 60;
   var max_frame = Object.keys(test_json["default"]).length - 1;
   var min_frame = 0;
+  var max_time = max_frame / frame_rate;
 
   console.log(max_frame);
+
+  function fancyTimeFormat(duration) {
+    // Hours, minutes and seconds
+    var hrs = ~~(duration / 3600);
+    var mins = ~~((duration % 3600) / 60);
+    var secs = ~~duration % 60;
+
+    // Output like "1:01" or "4:03:59" or "123:03:59"
+    var ret = "";
+
+    if (hrs > 0) {
+      ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+    }
+
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
+  }
+
+  var total_time = fancyTimeFormat(max_time);
 
   function updateFrame(current_frame_idx) {
     const joint_set = test_json["default"][current_frame.toString()];
@@ -83,18 +104,65 @@
   }
 </script>
 
-<div class="flex content-center items-center h-16 px-16">
-  <div class="flex h-16 justify-center py-4 ml-96">
-    <button on:click={playAnimation} class="mr-4">
-      <img src={button_src} class="w-8 h-8 mr-8" />
-    </button>
+<div
+  class="navbar bg-base-200 flex justify-center items-center h-16 px-16 sticky top-0 br-4 w-full "
+>
+  <div class="flex items-center justify-center align-middle">
+    <ul class="menu menu-horizontal bg-base-100 rounded-box mr-4">
+      <li>
+        <button on:click={playAnimation}>
+          {#if playing}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><rect x="6" y="4" width="4" height="16" /><rect
+                x="14"
+                y="4"
+                width="4"
+                height="16"
+              /></svg
+            >
+          {:else}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><polygon points="5 3 19 12 5 21 5 3" /></svg
+            >
+          {/if}
+        </button>
+      </li>
+      <li>
+        <button on:click={stopAnimation}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /></svg
+          >
+        </button>
+      </li>
+    </ul>
 
-    <button on:click={stopAnimation}>
-      <img src="../icons/square.svg" class="w-8 h-8 mr-16" />
-    </button>
-
+    <div class="mr-4">{fancyTimeFormat(current_frame / frame_rate)}</div>
     <input
-      class="mr-4 w-96"
+      class="range range-sm mr-4 w-96"
       type="range"
       min={min_frame}
       max={max_frame}
@@ -102,8 +170,6 @@
       on:input={(e) => updateFrame(current_frame)}
     />
 
-    <span>
-      {current_frame} / {max_frame}
-    </span>
+    <div>{total_time}</div>
   </div>
 </div>

@@ -3,35 +3,31 @@
   export let jointInfos: JointInfo[];
 </script>
 
-<div class="w-88 mb-16">
-  <!-- <div class=" mb-4">
-    <span class="text-white text-xl">Joint Controls</span>
-  </div> -->
-  <div class="h-max flex flex-col bg-slate-900 rounded-lg px-2 ">
-    {#each jointInfos as jointInfo, idx}
-      <div class="px-2 py-2 mb-4 ">
-        <div class="flex flex-row">
-          <div class="flex flex-col w-full text-center">
-            <span class="text-slate-300 text-sm mb-2">
-              Joint {`${idx}`} : {jointInfo.name}
-            </span>
-            <div class="w-full flex">
-              <input
-                class="mr-4 w-full"
-                bind:value={jointInfo.degree}
-                type="range"
-                min={jointInfo.lower}
-                max={jointInfo.upper}
-              />
-              <input
-                class="text-slate-300 text-center p-1 w-14 h-6 bg-slate-800 rounded"
-                bind:value={jointInfo.degree}
-                type="text"
-              />
-            </div>
-          </div>
+<ul class="menu rounded-box bg-base-100">
+  <li class="menu-title">
+    <span>Joint Controls</span>
+  </li>
+  {#each jointInfos as jointInfo, idx}
+    <li>
+      <div class="flex flex-row">
+        <div class="flex w-full items-center justify-center align-middle">
+          <span class="text-sm mb-2 w-32">
+            {`${idx}`} : {jointInfo.name}
+          </span>
+          <input
+            class="range range-primary range-xs mr-4 w-full w-40"
+            bind:value={jointInfo.degree}
+            type="range"
+            min={jointInfo.lower}
+            max={jointInfo.upper}
+          />
+          <input
+            class="text-center p-1 w-14 h-6 bg-base-300 rounded"
+            bind:value={jointInfo.degree}
+            type="text"
+          />
         </div>
       </div>
-    {/each}
-  </div>
-</div>
+    </li>
+  {/each}
+</ul>

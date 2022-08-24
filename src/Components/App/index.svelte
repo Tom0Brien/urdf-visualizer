@@ -22,9 +22,11 @@
   a two way binding, which means the child component will also update the `props` 
   in the parent component.
 -->
-<Interface bind:jointInfos bind:selectedUpAxis />
-<Player bind:jointInfos />
-<Scene {jointInfos} {selectedUpAxis} />
+<div class="drawer">
+  <Interface bind:jointInfos bind:selectedUpAxis />
+  <Player bind:jointInfos />
+  <Scene {jointInfos} {selectedUpAxis} />
+</div>
 
 <style global lang="postcss">
   @tailwind base;
