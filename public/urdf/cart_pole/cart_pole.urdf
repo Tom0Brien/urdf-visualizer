@@ -4,7 +4,7 @@
     <link name="slideBar">
     <visual>
       <geometry>
-        <box size="30 0.05 0.05"/>
+        <box size="10 0.05 0.05"/>
       </geometry>
       <origin xyz="0 0 0"/>
       <material name="green">
