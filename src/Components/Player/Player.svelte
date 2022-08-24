@@ -1,49 +1,109 @@
-<script lang="ts"></script>
+<script lang="ts">
+  import type { JointInfo } from "../../types";
+  export let jointInfos: JointInfo[];
 
-<div
-  class="flex content-center w-screen items-center items-center justify-center absolute bottom-0 z-50 bg-transparent mb-16"
->
-  <div
-    class="bg-white rounded-lg flex align-middle border border-slate-400 pt-1 px-2"
-  >
-    <!-- <button id="skip-backward" class="w-4 h-8 mr-4">
-      <svg
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-skip-back text-slate-800"
-        ><path d="M19 20 9 12l10-8v16zM5 19V5" /></svg
-      >
+  import * as test_json from "./test.json";
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  // Frame rate
+  var frame_rate = 60;
+  var play_icon = "../icons/play.svg";
+  var pause_icon = "../icons/pause.svg";
+  var button_src = play_icon;
+  var playing = false;
+  var current_frame = 0;
+
+  var max_frame = Object.keys(test_json["default"]).length - 1;
+  var min_frame = 0;
+
+  console.log(max_frame);
+
+  function updateFrame(current_frame_idx) {
+    const joint_set = test_json["default"][current_frame.toString()];
+    for (var j = 0; j < Object.keys(joint_set).length; j++) {
+      for (var k = 0; k < jointInfos.length; k++) {
+        if (jointInfos[k].name == Object.keys(joint_set)[j]) {
+          jointInfos[k].degree =
+            (joint_set[Object.keys(joint_set)[j]][0] * 180) / Math.PI;
+        }
+      }
+    }
+  }
+
+  async function playAnimation() {
+    if (playing) {
+      console.log("Stopping animation");
+      playing = false;
+      return;
+    }
+
+    playing = true;
+    for (
+      current_frame;
+      current_frame < Object.keys(test_json["default"]).length;
+      current_frame++
+    ) {
+      // Pause
+      if (!playing) {
+        button_src = play_icon;
+        break;
+      }
+      // Change icon to pause
+      button_src = pause_icon;
+
+      // Update the frames
+      updateFrame(current_frame);
+
+      // Delay between frames
+      await sleep((1 / frame_rate) * 1000);
+    }
+    // Reset the animation
+    if (playing) {
+      current_frame = 0;
+      button_src = play_icon;
+      playing = false;
+    }
+  }
+
+  function stopAnimation() {
+    // Set playing state to false and reset the frame counter
+    playing = false;
+    current_frame = 0;
+    // Reset the robot joints to initial frame
+    const joint_set = test_json["default"][current_frame.toString()];
+    for (var k = 0; k < jointInfos.length; k++) {
+      if (jointInfos[k].name == Object.keys(joint_set)[0]) {
+        jointInfos[k].degree =
+          (joint_set[Object.keys(joint_set)[0]][0] * 180) / Math.PI;
+      }
+    }
+  }
+</script>
+
+<div class="flex content-center items-center h-16 px-16">
+  <div class="flex h-16 justify-center py-4 ml-96">
+    <button on:click={playAnimation} class="mr-4">
+      <img src={button_src} class="w-8 h-8 mr-8" />
     </button>
 
-    <button id="pause" class="w-4 h-8 mr-4">
-      <svg
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-play text-slate-800"
-      >
-        <path d="m5 3 14 9-14 9V3z" />
-      </svg>
+    <button on:click={stopAnimation}>
+      <img src="../icons/square.svg" class="w-8 h-8 mr-16" />
     </button>
 
-    <button id="skip-forward" class="w-4 h-8">
-      <svg
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-skip-forward text-slate-800"
-        ><path d="m5 4 10 8-10 8V4zM19 5v14" /></svg
-      >
-    </button> -->
-    <img src="../icons/skip-back.svg" class="w-4 h-8 mr-4" />
-    <img src="../icons/play.svg" class="w-4 h-8 mr-4" />
-    <img src="../icons/skip-forward.svg" class="w-4 h-8" />
+    <input
+      class="mr-4 w-96"
+      type="range"
+      min={min_frame}
+      max={max_frame}
+      bind:value={current_frame}
+      on:input={(e) => updateFrame(current_frame)}
+    />
+
+    <span>
+      {current_frame} / {max_frame}
+    </span>
   </div>
 </div>

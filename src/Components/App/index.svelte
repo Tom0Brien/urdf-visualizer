@@ -24,8 +24,7 @@
   in the parent component.
 -->
 <Interface bind:jointInfos bind:selectedUpAxis />
-<TopBar />
-<Player />
+<Player bind:jointInfos />
 <Scene {jointInfos} {selectedUpAxis} />
 
 <style global lang="postcss">

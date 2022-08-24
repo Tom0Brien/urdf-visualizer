@@ -1,7 +1,10 @@
 <script lang="ts">
   import Player from "./Player.svelte";
+  import type { JointInfo } from "../../types";
+
+  export let jointInfos: JointInfo[];
 </script>
 
-<div class="absolute bottom-0 h-16 z-50 mb-16 bg-transparent">
-  <Player />
+<div class="top-0 bg-white border-b border-slate-200 w-screen h-8">
+  <Player bind:jointInfos />
 </div>

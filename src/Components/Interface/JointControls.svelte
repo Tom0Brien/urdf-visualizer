@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { JointInfo } from "../../types";
-
   export let jointInfos: JointInfo[];
 </script>
 
@@ -25,7 +24,7 @@
                 max={jointInfo.upper}
               />
               <input
-                class="text-slate-300 text-center p-2 w-9 h-6 bg-slate-800 rounded"
+                class="text-slate-300 text-center p-1 w-14 h-6 bg-slate-800 rounded"
                 bind:value={jointInfo.degree}
                 type="text"
               />
