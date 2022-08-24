@@ -10,7 +10,6 @@
 </script>
 
 <div class="drawer-side bg-base-200 w-76 h-screen absolute z-20 px-4 pt-4">
-  <label for="my-drawer" class="drawer-overlay" />
   <Header />
   <UpAxisDropdown bind:selectedUpAxis />
   <div class="divider" />

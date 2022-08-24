@@ -105,7 +105,7 @@
 </script>
 
 <div
-  class="navbar bg-base-200 flex justify-center items-center h-16 px-16 sticky top-0 br-4 w-full "
+  class="navbar bg-base-300 flex justify-center items-center h-16 px-16 sticky top-0 br-4 w-full "
 >
   <div class="flex items-center justify-center align-middle">
     <ul class="menu menu-horizontal bg-base-100 rounded-box mr-4">

@@ -7,6 +7,9 @@
 </script>
 
 <ul class="menu bg-base-100 rounded-box">
+  <li class="menu-title">
+    <span>Robot Details</span>
+  </li>
   <li tabindex="0" class="flex">
     <div class="flex justify-between">
       Axis Up Convention

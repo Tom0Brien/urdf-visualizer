@@ -24,7 +24,7 @@ import { loadSTL, loadDAE } from './utils/loadMesh';
 import setRobotRotation from './utils/setRobotRotation';
 import * as axes from '../../constants/axes';
 
-const URDF_FILE_PATH = '../urdf/cart_pole/cart_pole.urdf';
+const URDF_FILE_PATH = '../urdf/panda/panda_arm.urdf';
 
 /*
 
