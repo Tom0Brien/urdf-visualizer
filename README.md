@@ -1,6 +1,9 @@
 # URDF Visualizer
 
-A web application that visualizes robots defined using a URDF file based on [robot-kinematics-visualization](https://github.com/pinglu85/robot-kinematics-visualization).
+A web application that visualizes robots defined using a URDF file.
+
+![urdf-visualizer](https://user-images.githubusercontent.com/41043317/202045010-5a835c97-3186-4546-a784-0cb56112d04b.png)
+
 The application is built with [Svelte](https://svelte.dev/) and [Three.js](https://threejs.org/).
 
 ## Get started
