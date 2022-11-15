@@ -160,7 +160,7 @@
 
     <div class="mr-4">{fancyTimeFormat(current_frame / frame_rate)}</div>
     <input
-      class="range range-sm mr-4 w-96"
+      class="range range-sm mr-4 w-128"
       type="range"
       min={min_frame}
       max={max_frame}
